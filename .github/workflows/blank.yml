@@ -26,8 +26,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         with:
-          required_labels: 'bug, user-story'
-          GITHUB_TOKEN: '${{secrets.GITHUB_TOKEN}}'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: '["enhancement"]'
+      - name: See result
+        run: echo "${{ steps.check_pr_labels.outputs.result }}"
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: pwd
