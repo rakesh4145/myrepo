@@ -24,13 +24,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Check PR labels action step
-        id: check_pr_labels
-        uses: actions/checkout@v3
+        uses: jesusvasquez333/verify-pr-label-action@v1.4.0
         with:
-          github-token: "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"
-          labels: '["enhancement"]'
-      - name: See result
-        run: echo "${{ steps.check_pr_labels.outputs.result }}"
+            github-token: '${{ secrets.GITHUB_TOKEN }}'
+            valid-labels: 'bug, enhancement'
+            invalid-labels: 'help wanted, invalid'
+            pull-request-number: '${{ github.event.pull_request.number }}'
       - name: Run a one-line script
         run: pwd
 
